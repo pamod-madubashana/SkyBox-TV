@@ -1,0 +1,32 @@
+# Built application files
+*.apk
+*.aab
+
+# Gradle files
+build/
+.gradle/
+
+# Local configuration file (could be tracked per-environment but .gitignore is cleaner)
+local.properties
+
+# OS generated files
+.DS_Store
+.DS_User_Stamped
+
+# Windows generated files
+Thumbs.db
+ehthumbs.db
+
+# IDEs
+.idea/
+*.iml
+/.idea/workspace.xml
+/.idea/*.xml
+/.idea/*.properties
+
+# OSX generated files
+osx_x64_build/
+osx_arm64_build/
+
+# Covers for in-app billing libraries
+coverages/

@@ -64,7 +64,15 @@ This is the highest-risk part of the project. Prove it before building the compl
 
 Do not proceed to full UI implementation until the streaming behavior is measured. If TDLib cannot provide reliable incremental/random-access reads, compare alternatives: TDLib-managed download to temp file, local-file bridge over growing download, or separate streaming service.
 
-## Machine / session rules
+## Git commit and PR rules
+
+- **Primary author**: All commits and PRs must be authored by the primary GitHub account `pamod-madubashana` (email: `contact@pamod.is-a.dev`).
+- **Co-author**: Every commit and PR must include a co-author line for the secondary account:
+  ```
+  Co-authored-by: The-KLYRO <105803100+The-KLYRO@users.noreply.github.com>
+  ```
+- This applies to all commits, including fixups, squashes, and merge commits.
+- Never commit or open a PR without the co-author line.
 
 - Shell commands must go through **`rtk`** (`rtk run "..."` = cmd.exe on Windows; no `\"` inside args; `&` in args must be `^&`; avoid chained commands). File reads/edits use the dedicated tools, not the shell.
 - Git: commit only on explicit request; imperative mood; one concern per commit; never commit secrets or unrelated files.
