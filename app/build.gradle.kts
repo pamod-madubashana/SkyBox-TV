@@ -44,4 +44,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.13.0")
     // Kotlin stdlib
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
+    // Kotlin coroutines for Android
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    // TDLib Android core library
+    implementation("io.github.tdlib-android:core:0.1.1")
+    // TDLib Android KTX extensions
+    implementation("io.github.tdlib-android:ktx:0.1.1")
 }
