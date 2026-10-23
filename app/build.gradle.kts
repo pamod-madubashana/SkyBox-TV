@@ -27,9 +27,36 @@ android {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
 
-    defaultConfig {
-        manifestPlaceholders = [leanbackLauncher: "@string/leanback_launcher"]
+    signingConfigs {
+        release {
+            // Keystore path: prefer environment variable, fallback to local file
+            def keystorePath = System.getenv("SKYBOX_KEYSTORE_PATH") ?: file("android/keystore.jks")
+            def keystorePassword = System.getenv("SKYBOX_KEYSTORE_PASSWORD") ?: "android"
+            def keyAlias = "skybox-tv"
+            def keyPassword = "skybox"
+
+            storeFile keystorePath
+            storePassword keystorePassword
+            keyAlias keyAlias
+            keyPassword keyPassword
+        }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proGuardFile getDefaultProguardFile('proguard-android-optimize')
+            proGuardFile file('proguard-rules.pro')
+        }
+        debug {
+            // Debug builds without signing config
+        }
+    }
+
+    // Release ProGuard rules
+    releaseProguardFile file('proguard-rules.pro')
 }
 
 dependencies {
@@ -65,4 +92,12 @@ dependencies {
     implementation("androidx.media3:media3-datasource:1.3.1")
     // Media3 Common - shared utilities
     implementation("androidx.media3:media3-common:1.3.1")
+
+    // Test dependencies
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("io.mockk:mockk:1.13.8")
 }
