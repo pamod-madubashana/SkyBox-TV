@@ -122,7 +122,7 @@ fun AuthScreen(
                 is AuthState.Authorized -> {
                     AuthorizedScreen(
                         accountInfo = "Account ID: ${viewModel.userId}",
-                        onListChats = onListChats,
+                        onListChats = { /* TODO: Will be set by MainActivity */ },
                         onLogout = viewModel::logout,
                         focusRequester = focusRequester
                     )

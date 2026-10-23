@@ -1,6 +1,7 @@
 plugins {
     alias("com.android.application") apply true
     alias("org.jetbrains.kotlin.android") apply true
+    alias("com.google.kotlin.ksp") apply true
 }
 
 android {
@@ -50,4 +51,18 @@ dependencies {
     implementation("io.github.tdlib-android:core:0.1.1")
     // TDLib Android KTX extensions
     implementation("io.github.tdlib-android:ktx:0.1.1")
+
+    // Room - local database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    // Media3 ExoPlayer - main playback library
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    // Media3 UI - pre-built player UI components
+    implementation("androidx.media3:media3-ui:1.3.1")
+    // Media3 DataSource - custom data source interface
+    implementation("androidx.media3:media3-datasource:1.3.1")
+    // Media3 Common - shared utilities
+    implementation("androidx.media3:media3-common:1.3.1")
 }
