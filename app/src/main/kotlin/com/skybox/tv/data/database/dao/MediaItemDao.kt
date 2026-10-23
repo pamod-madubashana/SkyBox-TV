@@ -4,8 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Delete
 import androidx.room.Update
-import androidx.room.Index
+import kotlinx.coroutines.flow.Flow
 import com.skybox.tv.data.database.entity.MediaItemEntity
 
 @Dao
@@ -29,9 +30,8 @@ interface MediaItemDao {
     suspend fun search(query: String): java.util.List<MediaItemEntity>
 
     @Query("SELECT * FROM media_items ORDER BY dateAdded DESC")
-    suspend fun paging(): androidx.lifecycle.flow.Flow<java.util.List<MediaItemEntity>>
+    fun paging(): Flow<java.util.List<MediaItemEntity>>
 
-    @Index([ "chatId" ])
     @Query("SELECT * FROM media_items WHERE availabilityState = :state")
     suspend fun getByAvailability(state: String): java.util.List<MediaItemEntity>
 }
