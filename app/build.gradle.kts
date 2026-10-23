@@ -1,10 +1,11 @@
 plugins {
-    alias("com.android.application") apply true
-    alias("org.jetbrains.kotlin.android") apply true
-    alias("com.google.kotlin.ksp") apply true
+    id("com.android.application") version "8.2.0"
+    id("org.jetbrains.kotlin.android") version "1.9.23"
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
 }
 
 android {
+    namespace = "com.skybox.tv"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
@@ -15,8 +16,8 @@ android {
     buildToolsVersion = "34.0.0"
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
@@ -28,35 +29,33 @@ android {
     }
 
     signingConfigs {
-        release {
-            // Keystore path: prefer environment variable, fallback to local file
-            def keystorePath = System.getenv("SKYBOX_KEYSTORE_PATH") ?: file("android/keystore.jks")
-            def keystorePassword = System.getenv("SKYBOX_KEYSTORE_PASSWORD") ?: "android"
-            def keyAlias = "skybox-tv"
-            def keyPassword = "skybox"
+        create("release") {
+            val keystorePath = System.getenv("SKYBOX_KEYSTORE_PATH") ?: "android/keystore.jks"
+            val keystorePassword = System.getenv("SKYBOX_KEYSTORE_PASSWORD") ?: "android"
+            val keyAlias = "skybox-tv"
+            val keyPassword = "skybox"
 
-            storeFile keystorePath
-            storePassword keystorePassword
-            keyAlias keyAlias
-            keyPassword keyPassword
+            storeFile = file(keystorePath)
+            storePassword = keystorePassword
+            this.keyAlias = keyAlias
+            this.keyPassword = keyPassword
         }
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            signingConfig signingConfigs.release
-            proGuardFile getDefaultProguardFile('proguard-android-optimize')
-            proGuardFile file('proguard-rules.pro')
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         debug {
             // Debug builds without signing config
         }
     }
-
-    // Release ProGuard rules
-    releaseProguardFile file('proguard-rules.pro')
 }
 
 dependencies {

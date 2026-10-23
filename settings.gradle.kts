@@ -2,16 +2,15 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jitpack()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode = "strict"
     repositories {
         google()
         mavenCentral()
-        jitpack()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

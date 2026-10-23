@@ -1,8 +1,8 @@
 plugins {
-    alias("com.android.application") version("9.4.1") apply false
-    alias("org.jetbrains.kotlin.android") version("1.9.23") apply false
+    id("com.android.application") version "8.2.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.23" apply false
 }
 
-task clean(type: Delete) {
-    delete "$buildDir"
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
 }
