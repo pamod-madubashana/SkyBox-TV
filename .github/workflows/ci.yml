@@ -1,0 +1,78 @@
+name: SkyBox TV CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      # ============================================================
+      # Checkout repository
+      # ============================================================
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ============================================================
+      # Set up JDK 17
+      # ============================================================
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # ============================================================
+      # Set up Android SDK
+      # ============================================================
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          components: 'build-tools-34.0.0,platforms-android34'
+
+      # ============================================================
+      # Cache Gradle wrapper
+      # ============================================================
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/cache
+            ~/android/sdk
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # ============================================================
+      # Lint check
+      # ============================================================
+      - name: Run Lint
+        run: |
+            ./gradlew lint --no-daemon --write-logs
+
+      # ============================================================
+      # Build debug APK
+      # ============================================================
+      - name: Build debug APK
+        run: |
+            ./gradlew assembleDebug --no-daemon --write-logs
+
+      # ============================================================
+      # Upload debug APK as artifact for debugging
+      # ============================================================
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: skybox-tv-debug
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 7
