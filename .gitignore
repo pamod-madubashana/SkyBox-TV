@@ -29,4 +29,4 @@ osx_x64_build/
 osx_arm64_build/
 
 # Covers for in-app billing libraries
-coverages/
+coverages/.kotlin/ 
