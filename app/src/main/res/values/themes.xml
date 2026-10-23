@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base theme using TvTheme for TV-optimized UI -->
-    <style name="Theme.SkyBoxTV" parent="Theme.TvTheme">
-
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/magenta_600</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/cyan_400</item>
-        <item name="colorOnSecondary">@color/black</item>
+    <!-- Base theme for TV-optimized UI -->
+    <style name="SkyBoxTVTheme">
     </style>
 
     <!-- NoActionBar variant -->
-    <style name="Theme.SkyBoxTV.NoActionBar" parent="Theme.TvTheme.NoActionBar">
+    <style name="SkyBoxTVTheme_NoActionBar" parent="SkyBoxTVTheme">
     </style>
+</resources>

@@ -20,7 +20,7 @@ data class MediaItem(
     /** Duration in milliseconds (for video files) */
     val durationMs: Long
 ) : Comparable<MediaItem> {
-    override compareTo(other: MediaItem): Int {
+    override fun compareTo(other: MediaItem): Int {
         return mediaId.compareTo(other.mediaId)
     }
 }

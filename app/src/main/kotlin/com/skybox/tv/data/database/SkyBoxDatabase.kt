@@ -1,6 +1,7 @@
 package com.skybox.tv.data.database
 
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.skybox.tv.data.database.entity.CacheEntryEntity
 import com.skybox.tv.data.database.entity.MediaItemEntity
@@ -12,7 +13,7 @@ import com.skybox.tv.data.database.entity.WatchProgressEntity
     WatchProgressEntity::class,
     MediaSourceEntity::class,
     CacheEntryEntity::class
-], version = 1, exportSchemas = false)
+], version = 1, exportSchema = false)
 abstract class SkyBoxDatabase : RoomDatabase() {
 
     abstract fun mediaItemDao(): com.skybox.tv.data.database.dao.MediaItemDao

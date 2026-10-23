@@ -1,12 +1,12 @@
 plugins {
-    id("com.android.application") version "8.2.0"
-    id("org.jetbrains.kotlin.android") version "1.9.23"
-    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
+    id("com.android.application") version "8.6.0"
+    id("org.jetbrains.kotlin.android") version "2.0.0"
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 }
 
 android {
     namespace = "com.skybox.tv"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 26
         targetSdk = 34
@@ -25,7 +25,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     signingConfigs {
@@ -60,17 +60,19 @@ android {
 
 dependencies {
     // AndroidX Bill (BOM) - manages compose versions
-    implementation(platform("androidx.compose:compose-bom:2024.07.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    // Material3
+    implementation("androidx.compose.material3:material3:1.2.0")
     // Android TV Foundation - core TV UI components
-    implementation("androidx.tv:tv-foundation:1.3.0")
+    implementation("androidx.tv:tv-foundation:1.0.0")
     // Android TV Material - Material Design for TV
-    implementation("androidx.tv:tv-material:1.3.0")
+    implementation("androidx.tv:tv-material:1.0.0")
     // Activity Compose
     implementation("androidx.activity:activity-compose:1.8.2")
     // Core KTX
     implementation("androidx.core:core-ktx:1.13.0")
     // Kotlin stdlib
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
     // Kotlin coroutines for Android
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     // TDLib Android core library
